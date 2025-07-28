@@ -1,0 +1,89 @@
+Day 2 – Cybersecurity Learning Journey
+
+**HTTP Status Codes**
+These are server responses when your browser asks for something.
+
+Successful / Redirection:
+
+* 200 OK – Request was successful.
+* 201 Created – A new resource was created (like user signup).
+* 301 Moved Permanently – Page is now at a new permanent link.
+* 302 Found – Page is temporarily moved to another link.
+
+Client Errors (Problem from your side):
+
+* 400 Bad Request – The request was incorrect.
+* 401 Unauthorized – You need to log in or provide credentials.
+* 403 Forbidden – You are not allowed to access the resource.
+* 404 Not Found – The page doesn’t exist.
+* 405 Method Not Allowed – You used a wrong HTTP method.
+
+Server Errors (Problem from server side):
+
+* 500 Internal Server Error – Server crashed or misbehaved.
+* 503 Service Unavailable – Server is overloaded or down for maintenance.
+
+---
+
+**HTTP Request Basics**
+When you open a website, your browser sends a request to the server.
+
+* Method – Type of request (GET to fetch, POST to send data)
+* Header – Info like browser details, cookies
+* Body – The data sent in POST (like form data)
+
+---
+
+**Information Gathering Tools**
+
+Passive Reconnaissance (no contact with target):
+
+* whois – Finds domain details like owner, expiry
+* dnsenum – Finds subdomains and DNS records
+* Spiderfoot – OSINT tool that collects emails, social links, data leaks
+
+Active Reconnaissance (contacting the target):
+
+* nmap – Finds open ports, operating system, services
+* netdiscover – Scans your network to find devices
+
+---
+
+**Linux Basics (from TCM Security - fLinux 100)**
+
+You learned:
+
+* How to use the terminal with simple commands
+* How files and directories are arranged
+* How to move around folders and list files
+* How to use networking commands like ifconfig, ping, netstat
+
+---
+
+**Linux Permissions**
+Files have three types of users:
+
+* User (u) – The file owner
+* Group (g) – Group of users
+* Others (o) – Anyone else
+
+Permissions:
+
+* r – read (can view the file)
+* w – write (can edit the file)
+* x – execute (can run the file)
+
+Example:
+rw-r--r--
+This means:
+
+* Owner can read and write
+* Group can only read
+* Others can only read
+
+Important commands:
+
+* chmod – Change file permissions
+* chown – Change file owner
+
+
