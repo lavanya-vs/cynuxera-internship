@@ -1,0 +1,101 @@
+ Byte Eagle (Vulnerability Scanner) 
+
+1. **What is Byte Eagle?**
+   Byte Eagle (also called Eagle) is an open-source, multithreaded vulnerability scanner developed by BitTheByte.
+
+2. **Purpose of Byte Eagle**
+   It is designed to automatically detect various types of web vulnerabilities across multiple domains efficiently.
+
+3. **Why Use Byte Eagle?**
+
+   * It saves time by scanning multiple targets at once.
+   * It helps identify low-hanging security flaws quickly.
+   * Supports automation of recon and vulnerability discovery.
+
+4. **Types of Vulnerabilities Detected**
+
+   * CRLF Injection
+   * Subdomain Takeover
+   * Path Traversal
+   * PHP-CGI Remote Code Execution
+   * Shellshock
+   * Security Misconfigurations
+   * Sensitive Files Disclosure
+   * Known CVEs (Common Vulnerabilities and Exposures)
+
+5. **Features**
+
+   * Multithreaded for parallel scans
+   * Plugin-based structure (easy to add more checks)
+   * Saves output in structured JSON format
+   * Verbose debugging modes
+   * Lightweight and customizable
+
+---
+
+### How to Use Byte Eagle
+
+#### 1. Installation Steps
+
+```bash
+git clone https://github.com/BitTheByte/Eagle.git
+cd Eagle
+pip3 install -r requirements.txt
+```
+
+#### 2. Basic Scan
+
+Scan domains listed in a file (`domains.txt`):
+
+```bash
+python3 main.py -f domains.txt
+```
+
+#### 3. Ping Mode (Check if Hosts are Live)
+
+```bash
+python3 main.py -f domains.txt --ping
+```
+
+#### 4. Advanced Scan with Multiple Threads and Output to JSON
+
+```bash
+python3 main.py -f domains.txt -w 10 --db output.db.json
+```
+
+* `-w 10`: Use 10 threads
+* `--db output.db.json`: Save scan result in JSON format
+
+#### 5. Debug Mode (Verbose Output)
+
+```bash
+python3 main.py -f domains.txt -v    # Show warnings and successes
+python3 main.py -f domains.txt -vv   # Show errors too
+python3 main.py -f domains.txt -vvv  # Full debug log
+```
+
+---
+
+### Quick Reference: Common Commands
+
+| Purpose              | Command                                                    |
+| -------------------- | ---------------------------------------------------------- |
+| Clone repository     | `git clone https://github.com/BitTheByte/Eagle.git`        |
+| Change directory     | `cd Eagle`                                                 |
+| Install requirements | `pip3 install -r requirements.txt`                         |
+| Basic scan           | `python3 main.py -f domains.txt`                           |
+| Ping mode            | `python3 main.py -f domains.txt --ping`                    |
+| Threaded scan + save | `python3 main.py -f domains.txt -w 10 --db output.db.json` |
+| Debug mode (v)       | `python3 main.py -f domains.txt -v`                        |
+| Debug mode (vv)      | `python3 main.py -f domains.txt -vv`                       |
+| Debug mode (vvv)     | `python3 main.py -f domains.txt -vvv`                      |
+
+---
+
+### Advantages of Byte Eagle
+
+* Fast scanning with multithreading
+* Plugin-based for easy feature extension
+* Covers several important web issues
+* Useful in CTFs, bug bounty, and security assessments
+* Clear output for documentation and reporting
