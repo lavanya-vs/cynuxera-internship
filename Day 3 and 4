@@ -1,0 +1,79 @@
+Day 3 and 4 
+
+1. ONSET Framework (Phases in Cyber Security Incident Handling)
+
+Preparation: Getting ready with tools, policies, backups.
+
+Identification: Detecting if a breach or attack has happened.
+
+Containment: Stopping the attack from spreading.
+
+Eradication: Removing the attacker’s access or malware.
+
+Recovery: Restoring systems to normal.
+
+Lessons Learned: Analyzing what went wrong and improving.
+
+2. Real-Time and Non-Real-Time Operating Systems
+
+Real-Time Operating System (RTOS)
+
+Responds immediately to inputs.
+
+Used in critical systems like:
+
+Aircraft controls
+
+Medical devices
+
+Traffic signals
+
+Example: FreeRTOS, VxWorks
+
+Non-Real-Time Operating System
+
+Normal systems like Windows or Linux.
+
+Not time-sensitive.
+
+Used in personal computers, mobile phones.
+
+3. Dark Web
+
+What is it?
+
+A hidden part of the internet not indexed by Google.
+
+Accessed using special tools like Tor browser.
+
+Contains both legal and illegal content.
+
+Why people use it?
+
+Privacy, anonymity
+
+Access hidden marketplaces, forums
+
+4. DuckDuckGo
+
+A privacy-focused search engine.
+
+Doesn’t track you.
+
+Commonly used when accessing the dark web.
+
+5. Steps to Access Dark Web and Example
+
+Step 1: Install the Tor browser from the official Tor Project website.
+
+Step 2: Open Tor, it connects through multiple layers to hide your identity.
+
+Step 3: Use DuckDuckGo (or a dark web directory like "The Hidden Wiki") to search .onion sites.
+
+Step 4: Browse safely (avoid clicking unknown links).
+
+Step 5: Tried visiting a marketplace (like for ordering an iPhone as an experiment).
+
+Important: Many such marketplaces are scams or illegal.
+
+Note: Accessing the dark web is legal, but activities like buying from black markets are not.
