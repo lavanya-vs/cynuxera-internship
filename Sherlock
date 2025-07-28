@@ -1,0 +1,132 @@
+Sherlock CTF
+
+
+**What is Sherlock?**
+
+**Sherlock** is a **command-line tool** developed in Python for **finding usernames across social media and online platforms**. It uses automation to check if a specific username exists on over **350+ websites** by generating profile URLs and checking HTTP responses (status codes).
+
+---
+
+## 💡 **Why is Sherlock Used?**
+
+### 🔐 In Cybersecurity / Ethical Hacking:
+
+1. **OSINT Collection**: Helps gather publicly available data for ethical hacking, penetration testing, or investigations.
+2. **Digital Profiling**: Build a profile of someone’s online identity based on their usernames on different sites.
+3. **Threat Actor Identification**: Used by cybercrime investigators to trace accounts linked to suspicious users.
+4. **Target Reconnaissance**: During red team operations or bug bounty tasks to learn more about a target.
+5. **Username Enumeration**: Quickly checks which social platforms a username is already in use on.
+
+### 🧑‍💻 In General Use:
+
+* For checking if your desired **username is available** before signing up.
+* Helps **journalists, analysts, and security researchers** track digital identities.
+
+---
+
+## ⚙️ **How Does Sherlock Work?**
+
+### ✅ Step-by-Step Process:
+
+1. Takes a **username** as input.
+2. Constructs URLs for social sites (like `https://github.com/<username>`).
+3. Sends HTTP requests to those URLs.
+4. Checks response:
+
+   * `Status 200`: Profile exists.
+   * `Status 404`: Not found (username not taken).
+5. Outputs results in terminal or file.
+
+Sherlock does not need login credentials or API keys—it works **entirely using public URLs** and requests.
+
+---
+
+## 🧰 **Installation (Kali Linux, Ubuntu, Termux)**
+
+### Option 1: Standard Linux
+
+```bash
+sudo apt update
+sudo apt install git python3 python3-pip
+git clone https://github.com/sherlock-project/sherlock.git
+cd sherlock
+pip3 install -r requirements.txt
+```
+
+### Option 2: On Android via Termux
+
+```bash
+pkg update && pkg upgrade
+pkg install git python
+git clone https://github.com/sherlock-project/sherlock
+cd sherlock
+pip install -r requirements.txt
+```
+
+---
+
+## 🔎 **Usage Examples (Common Commands)**
+
+| Command                                    | Use Description                             |
+| ------------------------------------------ | ------------------------------------------- |
+| `python3 sherlock lavanyaVS`               | Basic scan for username                     |
+| `python3 sherlock -f usernames.txt`        | Scan multiple usernames from a file         |
+| `python3 sherlock lavanyaVS --print-found` | Display only sites where username was found |
+| `python3 sherlock lavanyaVS --json`        | Export result in JSON format                |
+| `python3 sherlock lavanyaVS > out.txt`     | Save output to a text file                  |
+| `python3 sherlock lavanyaVS --tor`         | Route through Tor (anonymous scanning)      |
+| `python3 sherlock lavanyaVS --proxy URL`   | Use a proxy (like SOCKS5 or HTTP)           |
+
+---
+
+## 🧪 **Behind the Scenes — Technical Insights**
+
+### 🧵 Multi-threading:
+
+Sherlock uses Python's `threading` to make multiple site checks simultaneously, which **speeds up scanning**.
+
+### 🛠 Tools & Libraries:
+
+* **Python 3**: Programming language used.
+* **Requests module**: For HTTP communication.
+* **Colorama**: Adds color to the terminal output.
+* **Rich**: (optional) Better output formatting.
+
+### 🌐 Websites Supported:
+
+Popular sites include:
+
+* GitHub, Instagram, Twitter, Facebook, Reddit, TikTok, LinkedIn, Pinterest, Medium, and 300+ others.
+
+---
+
+## 🛡️ **Limitations**
+
+* May give **false negatives** if the website blocks bots or uses JavaScript rendering.
+* Some websites **rate-limit** requests, so too many scans can get your IP temporarily blocked.
+* **Tor or VPNs** are recommended for large scans.
+
+---
+
+## 📦 **Practical Uses in Real-Life Scenarios**
+
+| Scenario                             | Sherlock’s Role                           |
+| ------------------------------------ | ----------------------------------------- |
+| Finding an attacker’s other accounts | Search known usernames                    |
+| Investigating cyberbullying          | Track multiple profiles of suspect        |
+| OSINT for bug bounty programs        | Recon phase to gather surface information |
+| Checking availability for branding   | Ensure a handle is free across platforms  |
+
+---
+
+## 📝 Summary Table
+
+| Feature          | Description                          |
+| ---------------- | ------------------------------------ |
+| Language         | Python                               |
+| Type             | CLI OSINT Tool                       |
+| Output Formats   | Text, JSON                           |
+| Input Types      | Single username or multiple via file |
+| Site Coverage    | 350+ websites                        |
+| Use Case         | Recon, OSINT, digital footprinting   |
+| Advanced Options | Tor, Proxies, Custom Output          |
