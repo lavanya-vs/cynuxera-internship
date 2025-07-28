@@ -1,0 +1,229 @@
+Day 1 – Cybersecurity Learning Summary
+
+Steps of Hacking (Detailed and Simplified)
+
+1. Collecting Information (Reconnaissance)
+
+* This is the first step where you observe the target silently, without touching or interacting with it.
+* You collect basic details like:
+
+  * The main website (like example.com)
+  * Subdomains (like mail.example.com, admin.example.com)
+  * IP addresses of the servers hosting the website
+  * What software, operating systems, or technologies they are using
+  * What ports are open and what services are running on them
+* Tools used for this:
+
+  * Shodan (find internet-connected devices)
+  * Netcraft (shows site information)
+  * Whois (shows domain ownership info)
+  * Google search tricks (called Google Dorking)
+
+2. Checking for Chance of Attack (Vulnerability Identification)
+
+* Once you collect the information, you now look for weaknesses.
+* You check:
+
+  * Are they using old software versions?
+  * Are any services exposed to the public that shouldn’t be?
+  * Are there login pages with weak protection?
+* If you find anything outdated, you look up if that version has known bugs or exploits.
+
+3. Scanning
+
+* In this step, you interact with the system to gather technical data.
+* You scan for:
+
+  * Open ports like 80, 443, 21, 22, etc.
+  * Services running on those ports like HTTP server, SSH, FTP
+  * Their versions and potential vulnerabilities
+* Tool used: Nmap (most popular scanner)
+
+4. Gaining Access
+
+* You now try to break in using the weakness you discovered.
+* Example 1: You found a login page. Try common username/password combos or brute force using tools.
+* Example 2: You found an outdated version of software. Use a public exploit to take control.
+* Tools used: Metasploit, SQLmap, Hydra, Burp Suite
+
+5. Maintaining Access
+
+* After you get in, you try to stay inside for future use.
+* You can:
+
+  * Install a backdoor (program that lets you come back later)
+  * Add a hidden admin user
+  * Set up a remote shell
+* This helps in continuous access even if the main issue gets fixed.
+
+6. Clearing Logs
+
+* Once you’ve done what you want, you hide all your tracks.
+* You remove system logs, event records, login history etc.
+* Goal: Make sure no one knows you were there.
+
+---
+
+Tools and Concepts
+
+Shodan
+
+* A powerful search engine for devices connected to the internet.
+* It shows:
+
+  * Open ports and services
+  * What software and versions they use
+  * Security cameras, routers, IoT devices, etc.
+* Example: Searching `port:80 city:Bangalore` shows all web servers in Bangalore running HTTP on port 80.
+
+Domain and Subdomain
+
+* Domain: The main address (example: google.com)
+* Subdomain: A smaller section within that domain (example: mail.google.com, maps.google.com)
+
+Important Ports
+
+* Port 80: Used for websites without encryption (HTTP)
+* Port 443: Used for secure websites (HTTPS with SSL/TLS)
+* These two ports should be open if a website is live.
+* Closed ports may mean service is not running or blocked by a firewall.
+
+---
+
+A and AAAA Records
+
+* These are DNS records that help convert domain names into IP addresses.
+* A Record: Maps a domain to IPv4 address (example: 142.250.183.206)
+* AAAA Record: Maps a domain to IPv6 address (example: 2607\:f8b0:4004\:c1b::8a)
+* IPv4 = older, like 123.45.67.89
+* IPv6 = newer, longer, and supports more devices
+
+---
+
+Netcraft
+
+* Website: [https://www.netcraft.com](https://www.netcraft.com)
+* You can check:
+
+  * Who is hosting the site
+  * What technologies the site uses (like Apache, Nginx, PHP, etc.)
+  * How long the site has been online
+  * If the site is possibly malicious
+
+Wappalyzer Extension
+
+* A browser extension that shows what technology a website uses.
+* It detects:
+
+  * Frontend: JavaScript libraries (React, Angular, etc.)
+  * Backend: PHP, Node.js, Python
+  * CMS: WordPress, Joomla
+  * Others: Google Analytics, Bootstrap, Cloudflare
+* Easy to use: install from Chrome Web Store, open a site, and click the icon to see tech info.
+
+---
+
+VirusTotal
+
+* Website: [https://www.virustotal.com](https://www.virustotal.com)
+* You can upload:
+
+  * A file from your system (exe, pdf, etc.)
+  * A URL (suspicious link)
+  * A domain or IP address
+* It checks using 70+ antivirus tools like Kaspersky, Avast, McAfee
+* You can see if something is marked as dangerous or clean
+
+API Key
+
+* Used when you want to connect VirusTotal to your own script or tool.
+* Steps:
+
+  1. Create a VirusTotal account
+  2. Go to your profile
+  3. There you’ll find your personal API key
+
+---
+
+Domain Hierarchy (Structure)
+
+Root (.)
+└── Top Level Domain (TLD): .com, .org, .net, .in
+└── Second Level: example.com, amazon.in
+└── Subdomain: mail.example.com, login.amazon.in
+
+* Root: The invisible top level, represented by `.`
+* TLD: Category like `.com` (commercial), `.org` (organization), `.in` (India)
+* Second level: The actual name like google.com
+* Subdomain: Divisions under that, like login.google.com or support.google.com
+
+---
+
+Cybersecurity Exams (Certifications)
+
+CEH
+
+* Full Form: Certified Ethical Hacker
+* Level: Beginner–Intermediate
+* Focuses on ethical hacking tools and techniques
+
+CompTIA Security+
+
+* Full Form: Computing Technology Industry Association Security+
+* Level: Beginner
+* Good foundation for beginners in cybersecurity
+
+eJPT
+
+* Full Form: eLearnSecurity Junior Penetration Tester
+* Level: Beginner
+* Practical exam, teaches basic penetration testing
+
+OSCP
+
+* Full Form: Offensive Security Certified Professional
+* Level: Advanced
+* Highly respected hands-on certification in ethical hacking
+
+CISSP
+
+* Full Form: Certified Information Systems Security Professional
+* Level: Advanced
+* Focuses on overall information security management and design
+
+---
+
+What Happens When You Request a Website (DNS Request)
+
+When you type a website like [www.google.com](http://www.google.com) in the browser, these 7 steps happen:
+
+1. Browser Cache Check
+
+* Your browser checks if it already has the IP address stored from before.
+
+2. System Hosts File
+
+* If not found, your computer checks a file called `hosts` to see if the domain is mapped there manually.
+
+3. Ask DNS Resolver
+
+* If still not found, it asks your DNS resolver (usually your internet service provider or Google DNS like 8.8.8.8).
+
+4. Resolver Contacts Root Server
+
+* The resolver then asks the root DNS server: “Where can I find info about .com domains?”
+
+5. Root Server Replies
+
+* The root server responds: “Ask the .com TLD server for more info.”
+
+6. TLD Server Replies
+
+* The TLD (.com) server tells the resolver the address of google.com’s nameserver.
+
+7. Nameserver Gives IP
+
+* The final nameserver (google.com’s) gives the real IP like 142.250.183.206
+* Now your browser connects to that IP and loads the website.
+
+
